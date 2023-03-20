@@ -1,7 +1,6 @@
-#include <unistd.h>
+#include <stdio.h>
 
 int main(void) {
-    char *art = "A masterpiece of art is the expression of one's soul.\n";
-    write(STDOUT_FILENO, art, sizeof(art));
+    printf("%s\n", "A masterpiece of art is the expression of one's soul.");
     return 0;
 }
