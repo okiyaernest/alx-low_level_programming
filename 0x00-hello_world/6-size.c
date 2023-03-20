@@ -1,2 +1,14 @@
-#!/bin/bash
-#include <stdio.h> int main(void) { printf("Size of char: %ld byte(s)\nSize of int: %ld byte(s)\nSize of long int: %ld byte(s)\nSize of long long int: %ld byte(s)\nSize of float: %ld byte(s)\nSize of double: %ld byte(s)\nSize of long double: %ld byte(s)\n", sizeof(char), sizeof(int), sizeof(long int), sizeof(long long int), sizeof(float), sizeof(double), sizeof(long double)); return 0; }
+#include <stdio.h>
+
+int main(void)
+{
+    printf("Size of char: %ld byte(s)\n", sizeof(char));
+    printf("Size of short: %ld byte(s)\n", sizeof(short));
+    printf("Size of int: %ld byte(s)\n", sizeof(int));
+    printf("Size of long: %ld byte(s)\n", sizeof(long));
+    printf("Size of long long: %ld byte(s)\n", sizeof(long long));
+    printf("Size of float: %ld byte(s)\n", sizeof(float));
+    printf("Size of double: %ld byte(s)\n", sizeof(double));
+    printf("Size of long double: %ld byte(s)\n", sizeof(long double));
+    return 0;
+}
