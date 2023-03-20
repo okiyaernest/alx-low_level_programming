@@ -5,15 +5,19 @@
  *
  * Return: Always 0 (Success)
  */
+
 int main(void)
 {
-        printf("Size of char: %lu byte(s)\n", sizeof(char));
-        printf("Size of int: %lu byte(s)\n", sizeof(int));
-        printf("Size of long int: %lu byte(s)\n", sizeof(long int));
-        printf("Size of long long int: %lu byte(s)\n", sizeof(long long int));
-        printf("Size of float: %lu byte(s)\n", sizeof(float));
-        printf("Size of double: %lu byte(s)\n", sizeof(double));
-        printf("Size of long double: %lu byte(s)\n", sizeof(long double));
-        printf("Size of void *: %lu byte(s)\n", sizeof(void *));
-        return (0);
+    int integerType;
+    float floatType;
+    double doubleType;
+    char charType;
+
+    // Sizeof operator is used to evaluate the size of a variable
+    printf("Size of int: %ld bytes\n",sizeof(integerType));
+    printf("Size of float: %ld bytes\n",sizeof(floatType));
+    printf("Size of double: %ld bytes\n",sizeof(doubleType));
+    printf("Size of char: %ld byte\n",sizeof(charType));
+
+    return 0;
 }
