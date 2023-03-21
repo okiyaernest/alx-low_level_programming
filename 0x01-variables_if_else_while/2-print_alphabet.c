@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 /**
  * main - Entry point
  *
+ * Description: Prints the lowercase alphabet using only putchar
+ *
  * Return: Always 0 (Success)
  */
+
 int main(void)
 {
     char letter = 'a';
@@ -15,6 +19,8 @@ int main(void)
         putchar(letter);
         letter++;
     }
+
     putchar('\n');
+
     return (0);
 }
