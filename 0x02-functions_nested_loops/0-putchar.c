@@ -1,13 +1,32 @@
 #include <unistd.h>
 
 /**
- * putchar - writes the character c to stdout
- * @c: The character to print
+ * main - Entry point
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: Always 0 (Success)
  */
-int putchar(char c)
+int main(void)
 {
-	return (write(1, &c, 1));
+    char c = '_';
+
+    write(STDOUT_FILENO, &c, 1);
+    c = 'p';
+    write(STDOUT_FILENO, &c, 1);
+    c = 'u';
+    write(STDOUT_FILENO, &c, 1);
+    c = 't';
+    write(STDOUT_FILENO, &c, 1);
+    c = 'c';
+    write(STDOUT_FILENO, &c, 1);
+    c = 'h';
+    write(STDOUT_FILENO, &c, 1);
+    c = 'a';
+    write(STDOUT_FILENO, &c, 1);
+    c = 'r';
+    write(STDOUT_FILENO, &c, 1);
+    c = '\n';
+    write(STDOUT_FILENO, &c, 1);
+
+    return (0);
 }
+
