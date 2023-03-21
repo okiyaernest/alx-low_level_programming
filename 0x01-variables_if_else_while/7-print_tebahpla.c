@@ -5,16 +5,22 @@
 /**
  * main - Entry point
  *
+ * Description: Prints the lowercase alphabet in reverse using only putchar
+ *
  * Return: Always 0 (Success)
  */
 
 int main(void)
 {
-	char low;
+    char letter = 'z';
 
-	for (low = 'z'; low >= 'a'; low--)
-		putchar(low);
-		putchar('\n');
+    while (letter >= 'a')
+    {
+        putchar(letter);
+        letter--;
+    }
 
-	return (0);
+    putchar('\n');
+
+    return (0);
 }
