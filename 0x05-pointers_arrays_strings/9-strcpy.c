@@ -8,14 +8,11 @@
  *
  * Return: pointer to dest
  */
-char *_strcpy(char *dest,  char *src)
-{
-    char *dest_start = dest;
-
+char* my_strcpy(char* dest, const char* src) {
+    char* p = dest;
     while (*src != '\0') {
-       		 *dest++ = *src++;
-}
-
-    *dest = '\0'; // add terminating null byte
-    return dest_start;
+        *p++ = *src++;
+    }
+    *p = '\0';
+    return dest;
 }
