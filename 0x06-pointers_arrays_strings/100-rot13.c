@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * rot13 - Encodes a string using rot13.
  * @s: Pointer to the string to be encoded.
