@@ -16,12 +16,9 @@ int main(void)
    * - only one statement
    * - you are not allowed to code anything else than this line of code
    */
-  ;
+  *(p + (2 * sizeof(int))) = 98;
   /* ...so that this prints 98\n */
-
-  *(p + (2 * sizeof(int))) = 98; // added line
-
+ 
   printf("a[2] = %d\n", a[2]);
   return (0);
 }
-
