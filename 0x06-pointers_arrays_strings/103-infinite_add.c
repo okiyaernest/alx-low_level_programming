@@ -1,55 +1,37 @@
-#include <stdio.h>
 #include "main.h"
-
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#include <stdio.h>
 
 /**
-
-infinite_add - Adds two numbers.
-
-@n1: Pointer to first number string
-
-@n2: Pointer to second number string
-
-@r: Pointer to buffer to store result
-
-@size_r: Size of buffer to store result
-
-Return: Pointer to the result or 0 if the result can not be stored in r.
-*/
+ * infinite_add - Adds two numbers
+ *
+ * @n1: The first number to add
+ * @n2: The second number to add
+ * @r: The buffer to store the result
+ * @size_r: The size of the buffer
+ *
+ * Return: Pointer to the result, or 0 if the result can not be stored in r
+ */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-    int len1 = strlen(n1);
-    int len2 = strlen(n2);
-    int len = MAX(len1, len2);
-    int carry = 0;
-    int sum = 0;
-    
-    if (len + 1 > size_r) {
-        return 0;
-    }
-    
-    r[len + 1] = '\0';
-    while (len1 > 0 || len2 > 0 || carry > 0) {
-        if (len1 > 0) {
-            sum += n1[--len1] - '0';
-        }
-        if (len2 > 0) {
-            sum += n2[--len2] - '0';
-        }
-        sum += carry;
-        r[len--] = sum % 10 + '0';
-        carry = sum / 10;
-        sum = 0;
-    }
-    
-    if (len + 1 > size_r) {
-        return 0;
-    }
-    
-    if (r[0] == '0') {
-        return &r[1];
-    } else {
-        return r;
-    }
+	int i, j, k, l, m;
+
+	i = j = k = l = m = 0;
+	while (n1[i] != '\0')
+		i++;
+	while (n2[j] != '\0')
+		j++;
+	if (i >= size_r || j >= size_r || size_r == 0)
+		return (0);
+	r[size_r - 1] = '\0';
+	for (i--, j--, k = size_r - 2; k >= 0 && (i >= 0 || j >= 0); i--, j--, k--)
+	{
+		l = (i >= 0) ? n1[i] - '0' : 0;
+		m = (j >= 0) ? n2[j] - '0' : 0;
+		r[k] = (l + m + r[k + 1]) % 10 + '0';
+		r[k + 1] = (l + m + r[k + 1]) / 10;
+		r[k + 1] = (k == 0 && r[k + 1] != 0) ? 0 : r[k + 1];
+	}
+	if (k == -1 && r[k + 1] != 0)
+		return (0);
+	return (r + ((r[0] == 0) ? 1 : 0));
 }
