@@ -3,6 +3,25 @@
 #include <string.h>
 
 /**
+ * count_words - counts the number of words in a string
+ * @str: the string to count words in
+ *
+ * Return: the number of words in the string
+ */
+int count_words(char *str)
+{
+    int i, count = 0;
+
+    for (i = 0; str[i]; i++)
+    {
+        if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+            count++;
+    }
+
+    return (count);
+}
+
+/**
  * strtow - splits a string into words
  * @str: the string to split
  *
@@ -11,66 +30,52 @@
 char **strtow(char *str)
 {
     char **words;
-    int i, j, k, n;
+    int i, j, k, count, len;
 
-    /* return NULL on invalid input */
+    /* check for invalid input */
     if (str == NULL || *str == '\0')
         return (NULL);
 
+    /* count the number of words */
+    count = count_words(str);
+
     /* allocate memory for the words array */
-    words = malloc(sizeof(char *));
+    words = malloc((count + 1) * sizeof(char *));
     if (words == NULL)
         return (NULL);
 
-    n = 0; /* count of words */
-    i = 0; /* current word start index */
-    j = 0; /* current word length */
-
-    /* split string into words */
-    while (str[i] != '\0')
+    /* split the string into words */
+    for (i = 0, j = 0; i < count; j++)
     {
         /* skip leading spaces */
-        while (str[i] == ' ')
-            i++;
-
-        /* break if end of string reached */
-        if (str[i] == '\0')
-            break;
-
-        /* allocate memory for the current word */
-        words = realloc(words, (n + 1) * sizeof(char *));
-        if (words == NULL)
-            return (NULL);
-
-        j = 0; /* reset current word length */
-
-        /* copy characters into current word */
-        while (str[i + j] != ' ' && str[i + j] != '\0')
+        while (str[j] == ' ')
             j++;
 
-        words[n] = malloc((j + 1) * sizeof(char));
-        if (words[n] == NULL)
+        /* find the end of the current word */
+        for (len = 0; str[j + len] && str[j + len] != ' '; len++)
+            ;
+
+        /* allocate memory for the current word */
+        words[i] = malloc((len + 1) * sizeof(char));
+        if (words[i] == NULL)
         {
             /* free memory for previous words on failure */
-            for (k = 0; k < n; k++)
+            for (k = 0; k < i; k++)
                 free(words[k]);
             free(words);
             return (NULL);
         }
 
-        memcpy(words[n], &str[i], j);
-        words[n][j] = '\0';
+        /* copy the current word into the words array */
+        for (k = 0; k < len; k++)
+            words[i][k] = str[j + k];
+        words[i][len] = '\0';
 
-        n++; /* increment count of words */
-        i += j; /* advance to next word start index */
+        i++; /* move to next word */
+        j += len; /* move to next non-space character */
     }
 
-    /* allocate memory for the NULL terminator */
-    words = realloc(words, (n + 1) * sizeof(char *));
-    if (words == NULL)
-        return (NULL);
-
-    words[n] = NULL; /* add NULL terminator */
+    words[i] = NULL; /* add NULL terminator */
 
     return (words);
 }
