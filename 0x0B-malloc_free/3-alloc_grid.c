@@ -8,25 +8,27 @@
  * @height: An input integer at number of rows
  * Return: pointer to a 2D array, NULL on failure
  */
-int **alloc_grid(int width, int height)
-{
-	int **array, i = 0, j = 0;
+int **alloc_grid(int width, int height) {
+    if (width <= 0 || height <= 0) {
+        return NULL;
+    }
 
-	if (width <= 0 || height <= 0)
-		return (NULL);
+    int **grid = malloc(height * sizeof(int *));
+    if (grid == NULL) {
+        return NULL;
+    }
 
-	array = (int **)malloc(sizeof(int *) * height);
-	if (array == NULL)
-		return (NULL);
-	for (; i < height; i++)
-	{
-		array[i] = (int *)malloc(sizeof(int) * width);
-		if (array[i] == NULL)
-			return (NULL);
-	}
+    for (int i = 0; i < height; i++) {
+        grid[i] = calloc(width, sizeof(int));
+        if (grid[i] == NULL) {
+            // Free previously allocated rows before returning NULL
+            for (int j = 0; j < i; j++) {
+                free(grid[j]);
+            }
+            free(grid);
+            return NULL;
+        }
+    }
 
-	for (i = 0; i < height; i++)
-		for (; j < width; j++)
-			array[i][j] = 0;
-	return (array);
+    return grid;
 }
