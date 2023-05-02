@@ -1,23 +1,46 @@
 #include "lists.h"
 
 /**
- * find_listint_loop - A function that finds the loop in a list
- * @head: A pointer to listint_t structure
- * Return: The address of the node where the loop start, or NULL
+ * struct listint_s - singly linked list
+ * @n: integer
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ * for Holberton project
+ */
+typedef struct listint_s
+{
+    int n;
+    struct listint_s *next;
+} listint_t;
+
+/**
+ * find_listint_loop - Finds the loop in a linked list
+ * @head: Pointer to the head of the list
+ *
+ * Return: The address of the node where the loop starts, or NULL if there is no loop
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *one = head, *two = head;
+    listint_t *slow = head, *fast = head;
 
-	while (one && two && two->next)
-	{
-		one = one->next;
-		two = two->next->next;
-		if (one == two)
-		{
-			return (one);
-		}
-	}
-	return (NULL);
+    while (slow && fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+        {
+            slow = head;
+            while (slow && fast)
+            {
+                if (slow == fast)
+                    return (slow);
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+    }
+
+    return (NULL);
 }
-
